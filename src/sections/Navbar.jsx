@@ -58,12 +58,14 @@ export default function Navbar() {
   const desktopRef = useRef(null);
   const mobileRef = useRef(null);
 
+  /* scroll */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /* ferme la recherche mobile si on passe en desktop */
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth >= 640) setSearchOpen(false);
@@ -72,14 +74,13 @@ export default function Navbar() {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
+  /* ferme les dropdowns au clic extérieur */
   useEffect(() => {
     const onClickOutside = (e) => {
-      if (desktopRef.current && !desktopRef.current.contains(e.target)) {
+      if (desktopRef.current && !desktopRef.current.contains(e.target))
         setDesktopOpen(false);
-      }
-      if (mobileRef.current && !mobileRef.current.contains(e.target)) {
+      if (mobileRef.current && !mobileRef.current.contains(e.target))
         setMobileOpen(false);
-      }
     };
     document.addEventListener("pointerdown", onClickOutside);
     return () => document.removeEventListener("pointerdown", onClickOutside);
@@ -99,41 +100,43 @@ export default function Navbar() {
   return (
     <header
       role="banner"
-      className="fixed top-0 left-0 right-0 z-10050 px-4 pt-1"
+      className="fixed top-0 left-0 right-0 z-[10050] px-3 sm:px-4 pt-1"
     >
       <nav
         aria-label="Navigation principale"
         className={`
-          relative z-10050 flex flex-col rounded-[20px]
+          relative flex flex-col rounded-2xl
           backdrop-blur-sm border transition-all duration-300
           ${
             isDark
               ? scrolled
-                ? "bg-purple-500/20 border-purple-500 shadow-[0_8px_32px_rgba(0,0,0,0.5),0_0_0_1px_rgba(26,111,255,0.14)]"
-                : "bg-transparent border-white/10 shadow-[0_4px_24px_rgba(0,0,0,0.3),0_0_0_1px_rgba(26,111,255,0.08)]"
+                ? "bg-purple-500/20 border-purple-500 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
+                : "bg-transparent border-white/10 shadow-[0_4px_24px_rgba(0,0,0,0.3)]"
               : scrolled
-                ? "bg-white/90 border-purple-500 shadow-[0_8px_32px_rgba(26,111,255,0.12),0_0_0_1px_rgba(26,111,255,0.10)]"
-                : "bg-white/10 border-white/10 shadow-[0_8px_32px_rgba(26,111,255,0.12),0_0_0_1px_rgba(26,111,255,0.10)]"
+                ? "bg-white/90 border-purple-500 shadow-[0_8px_32px_rgba(26,111,255,0.12)]"
+                : "bg-white/10 border-white/10 shadow-[0_8px_32px_rgba(26,111,255,0.12)]"
           }
         `}
       >
-        <div className="pointer-events-none absolute top-0 left-0 right-0 h-1/2 rounded-t-[20px] bg-linear-to-b from-white/6 to-transparent" />
+        {/* Reflet haut */}
+        <div className="pointer-events-none absolute top-0 left-0 right-0 h-1/2 rounded-t-2xl bg-gradient-to-b from-white/5 to-transparent" />
 
-        <div className="flex items-center justify-between gap-4 px-5 py-4">
+        {/* ── BARRE PRINCIPALE ── */}
+        <div className="flex items-center justify-between gap-2 px-3 sm:px-5 py-3">
           {/* Logo */}
           <Link
             to="/"
             aria-label="HCA Tech — Retour à l'accueil"
-            className="flex items-center gap-2.5 shrink-0 relative z-10"
+            className="flex items-center gap-2 shrink-0 relative z-10"
           >
             <img
               src="/logo-hca-tech.png"
               alt="Logo HCA Tech"
-              width="38"
-              height="38"
-              className="w-9 h-9 object-contain"
+              width="36"
+              height="36"
+              className="w-8 h-8 sm:w-9 sm:h-9 object-contain"
             />
-            <span className="text-xl font-bold tracking-tight leading-none select-none">
+            <span className="text-lg sm:text-xl font-bold tracking-tight leading-none select-none">
               <span className="text-primary">Hca</span>
               <span className="text-text"> Tech</span>
             </span>
@@ -142,14 +145,14 @@ export default function Navbar() {
           {/* Recherche desktop */}
           <div
             ref={desktopRef}
-            className="relative z-10050 flex-1 max-w-sm hidden sm:block overflow-visible"
+            className="relative z-[10050] flex-1 max-w-sm hidden sm:block"
           >
             <label htmlFor="search-navbar" className="sr-only">
               Rechercher un produit
             </label>
             <span
               aria-hidden="true"
-              className="absolute left-3 top-1/2 -translate-y-1/2 icon-[mdi--magnify] w-4.5 h-4.5 text-white pointer-events-none"
+              className="absolute left-3 top-1/2 -translate-y-1/2 icon-[mdi--magnify] w-4 h-4 text-white pointer-events-none"
             />
             <input
               id="search-navbar"
@@ -163,9 +166,9 @@ export default function Navbar() {
               placeholder="Rechercher un produit..."
               autoComplete="off"
               className="
-                w-full rounded-xl bg-primary/8 border border-purple-500/50
+                w-full rounded-xl bg-primary/10 border border-purple-500/50
                 pl-9 pr-4 py-2 text-sm text-white
-                placeholder:text-white/70
+                placeholder:text-white/60
                 focus:outline-none focus:border-purple-500
                 focus:ring-2 focus:ring-purple-500/20
                 focus:bg-purple-500/10 transition-all duration-200
@@ -182,19 +185,20 @@ export default function Navbar() {
             />
           </div>
 
-          {/* Actions */}
-          <div className="flex items-center gap-0.5 shrink-0 relative z-10">
+          {/* ── ACTIONS ── */}
+          {/* Conteneur actions : on garde tous les boutons serrés mais lisibles */}
+          <div className="flex items-center shrink-0 relative z-10">
             {/* Loupe mobile */}
             <button
               type="button"
               onClick={() => setSearchOpen((v) => !v)}
               aria-label="Rechercher"
               aria-expanded={searchOpen}
-              className="sm:hidden p-2.5 rounded-xl border border-transparent text-text hover:text-text hover:bg-white/8 hover:border-primary/25 transition-all duration-300 cursor-pointer"
+              className="sm:hidden p-2 rounded-xl border border-transparent text-text hover:bg-white/10 hover:border-primary/25 transition-all duration-200 cursor-pointer"
             >
               <span
                 aria-hidden="true"
-                className={`w-5 h-5 block transition-all duration-300 ${
+                className={`w-5 h-5 block transition-all duration-200 ${
                   searchOpen ? "icon-[mdi--close]" : "icon-[mdi--magnify]"
                 }`}
               />
@@ -207,7 +211,7 @@ export default function Navbar() {
               aria-label={
                 isDark ? "Passer en mode clair" : "Passer en mode sombre"
               }
-              className="relative p-2.5 rounded-xl border border-transparent text-text hover:text-text hover:bg-white/8 hover:border-primary/25 transition-all duration-300 cursor-pointer overflow-hidden"
+              className="relative p-2 rounded-xl border border-transparent text-text hover:bg-white/10 hover:border-primary/25 transition-all duration-200 cursor-pointer overflow-hidden"
             >
               <span
                 aria-hidden="true"
@@ -225,6 +229,7 @@ export default function Navbar() {
                     : "opacity-100 rotate-0 scale-100 text-yellow-500"
                 } ${spinning ? "animate-spin" : ""}`}
               />
+              {/* Placeholder pour la taille */}
               <span
                 aria-hidden="true"
                 className="icon-[mdi--weather-night] w-5 h-5 opacity-0 block"
@@ -240,14 +245,14 @@ export default function Navbar() {
                   ? `Panier — ${cartCount} article${cartCount > 1 ? "s" : ""}`
                   : "Panier vide"
               }
-              className="relative p-2.5 rounded-xl border border-transparent text-text hover:text-text hover:bg-white/8 hover:border-primary/25 transition-all duration-300 cursor-pointer"
+              className="relative p-2 rounded-xl border border-transparent text-text hover:bg-white/10 hover:border-primary/25 transition-all duration-200 cursor-pointer"
             >
               <span
                 aria-hidden="true"
                 className="icon-[mdi--cart-variant] w-5 h-5 block"
               />
               {cartCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 min-w-4.5 h-4.5 bg-purple-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center px-1 leading-none shadow-[0_2px_6px_rgba(139,92,246,0.5)]">
+                <span className="absolute -top-0.5 -right-0.5 min-w-4 h-4 bg-purple-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center px-1 leading-none shadow-[0_2px_6px_rgba(139,92,246,0.5)]">
                   {cartCount}
                 </span>
               )}
@@ -258,7 +263,7 @@ export default function Navbar() {
               type="button"
               onClick={() => setMenuOpen(true)}
               aria-label="Ouvrir le menu"
-              className="p-2.5 rounded-xl border border-transparent text-text hover:text-text hover:bg-white/8 hover:border-primary/25 transition-all duration-300 cursor-pointer"
+              className="p-2 rounded-xl border border-transparent text-text hover:bg-white/10 hover:border-primary/25 transition-all duration-200 cursor-pointer"
             >
               <span
                 aria-hidden="true"
@@ -268,21 +273,21 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Recherche mobile */}
+        {/* ── RECHERCHE MOBILE DÉPLIABLE ── */}
         <div
           className={`
-            transition-all duration-300 ease-in-out sm:hidden
-            ${searchOpen ? "max-h-120 opacity-100 overflow-visible" : "max-h-0 opacity-0 overflow-hidden"}
+            sm:hidden transition-all duration-300 ease-in-out overflow-hidden
+            ${searchOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"}
           `}
         >
-          <div className="px-4 pb-3 border-t border-white/8">
-            <label htmlFor="search-mobile" className="sr-only">
-              Rechercher un produit
-            </label>
-            <div ref={mobileRef} className="relative z-10050 mt-3">
+          <div className="px-3 pb-3 border-t border-white/10">
+            <div ref={mobileRef} className="relative z-[10050] mt-3">
+              <label htmlFor="search-mobile" className="sr-only">
+                Rechercher un produit
+              </label>
               <span
                 aria-hidden="true"
-                className="absolute left-3 top-3.25 icon-[mdi--magnify] w-4.5 h-4.5 text-text-muted pointer-events-none z-10"
+                className="absolute left-3 top-1/2 -translate-y-1/2 icon-[mdi--magnify] w-4 h-4 text-text-muted pointer-events-none z-10"
               />
               <input
                 id="search-mobile"
@@ -297,11 +302,11 @@ export default function Navbar() {
                 placeholder="Rechercher un produit..."
                 autoComplete="off"
                 className="
-                  w-full rounded-xl bg-primary/8 border border-purple-500/30
+                  w-full rounded-xl bg-primary/10 border border-purple-500/30
                   pl-9 pr-4 py-2.5 text-sm text-text
                   placeholder:text-text-muted
-                  focus:outline-none focus:border-purple-500/60
-                  focus:ring-2 focus:ring-purple-500/20 transition-all duration-300
+                  focus:outline-none focus:border-purple-500
+                  focus:ring-2 focus:ring-purple-500/20 transition-all duration-200
                 "
               />
               <SearchDropdown
@@ -323,13 +328,14 @@ export default function Navbar() {
   );
 }
 
+/* ── Dropdown résultats ── */
 function SearchDropdown({ results, query, open, onClose }) {
   if (!open || query.trim().length < 1) return null;
 
   return (
     <div
       className="
-      absolute left-0 right-0 top-[calc(100%+2px)] z-10100
+      absolute left-0 right-0 top-[calc(100%+4px)] z-[10100]
       bg-bg border border-purple-500
       rounded-2xl shadow-[0_16px_48px_rgba(0,0,0,0.6)]
       overflow-hidden
@@ -350,7 +356,7 @@ function SearchDropdown({ results, query, open, onClose }) {
         <ul
           role="listbox"
           aria-label="Résultats de recherche"
-          className="divide-y divide-white/6 max-h-90 overflow-y-auto"
+          className="divide-y divide-white/6 max-h-80 overflow-y-auto"
         >
           {results.map((product) => (
             <SearchResult
@@ -386,9 +392,9 @@ function SearchResult({ product, onClose }) {
       to={`/produit/${product.id}`}
       onClick={onClose}
       aria-label={name}
-      className="group flex items-center gap-3 px-4 py-3 hover:bg-primary/8 transition-all duration-150"
+      className="group flex items-center gap-3 px-4 py-3 hover:bg-primary/10 transition-all duration-150"
     >
-      <div className="w-14 h-14 shrink-0 rounded-xl overflow-hidden bg-card-body border border-white/8 flex items-center justify-center">
+      <div className="w-12 h-12 shrink-0 rounded-xl overflow-hidden bg-card-body border border-white/8 flex items-center justify-center">
         <img
           src={image}
           alt={name}
@@ -408,17 +414,18 @@ function SearchResult({ product, onClose }) {
       <div className="flex flex-col items-end gap-1.5 shrink-0">
         <div className="flex flex-col items-end">
           {oldPrice && (
-            <span className="text-[12px] text-red-400 line-through">
+            <span className="text-[11px] text-red-400 line-through">
               {oldPrice.toLocaleString("fr-DZ")} DA
             </span>
           )}
-          <span className="text-[14px] font-black text-text">
+          <span className="text-[13px] font-black text-text">
             {newPrice.toLocaleString("fr-DZ")} DA
           </span>
         </div>
         <button
           type="button"
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             addToCart(product);
             onClose();
           }}

@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { CartProvider } from "./context/CartContext";
 import CartDrawer from "./components/CartDrawer";
@@ -22,17 +22,24 @@ function ScrollToHash() {
   const { hash } = useLocation();
 
   useEffect(() => {
-    if (hash) {
-      const element = document.querySelector(hash);
+    if (!hash) return;
 
-      if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }, 100);
-      }
+    const normalizedHash = hash.startsWith("#/") ? `#${hash.slice(2)}` : hash;
+    const targetId = normalizedHash.startsWith("#")
+      ? normalizedHash.slice(1)
+      : normalizedHash;
+
+    if (!targetId) return;
+
+    const element = document.getElementById(targetId);
+
+    if (element) {
+      setTimeout(() => {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
     }
   }, [hash]);
 
@@ -42,7 +49,7 @@ function ScrollToHash() {
 export default function App() {
   return (
     // Le composant racine configure le routeur et le contexte global du panier.
-    <HashRouter>
+    <BrowserRouter>
       <CartProvider>
         <ScrollToTop />
         <ScrollToHash />
@@ -57,6 +64,6 @@ export default function App() {
         <CartDrawer />
         <MobileMenu />
       </CartProvider>
-    </HashRouter>
+    </BrowserRouter>
   );
 }

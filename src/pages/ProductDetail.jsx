@@ -64,12 +64,12 @@ export default function ProductDetail() {
         <main className="min-h-screen bg-main pt-28 pb-20 px-4 flex flex-col items-center justify-center text-center">
           <span
             aria-hidden="true"
-            className="icon-[mdi--package-variant-closed] w-20 h-20 text-[var(--color-text-muted)]/30 mb-6"
+            className="icon-[mdi--package-variant-closed] w-20 h-20 text-text-muted/30 mb-6"
           />
-          <h1 className="text-2xl font-black text-[var(--color-text)] mb-3">
+          <h1 className="text-2xl font-black text-color-text mb-3">
             Produit introuvable
           </h1>
-          <p className="text-[var(--color-text-muted)] mb-6">
+          <p className="text-text-muted mb-6">
             Ce produit n\'existe pas ou a été retiré du catalogue.
           </p>
           <Link
@@ -247,7 +247,7 @@ export default function ProductDetail() {
                   )}
                   <span className="text-2xl sm:text-4xl font-black text-text-muted">
                     {newPrice.toLocaleString("fr-DZ")}{" "}
-                    <span className="text-lg font-semibold text-[var(--color-text-muted)]">
+                    <span className="text-lg font-semibold text-text-muted">
                       DA
                     </span>
                   </span>
@@ -287,7 +287,7 @@ export default function ProductDetail() {
                       ${
                         added
                           ? "bg-green-600 shadow-[0_8px_30px_rgba(22,163,74,0.35)]"
-                          : "bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-[0_8px_30px_rgba(37,99,235,0.25)] hover:shadow-[0_12px_40px_rgba(37,99,235,0.35)]"
+                          : "bg-linear-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-[0_8px_30px_rgba(37,99,235,0.25)] hover:shadow-[0_12px_40px_rgba(37,99,235,0.35)]"
                       }
                     `}
                   >
@@ -306,7 +306,7 @@ export default function ProductDetail() {
                   <button
                     type="button"
                     onClick={handleOrderNow}
-                    className="flex-1 flex items-center justify-center gap-2.5 rounded-2xl px-8 py-4 text-sm font-bold text-white bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 shadow-[0_8px_30px_rgba(139,92,246,0.3)] hover:shadow-[0_12px_40px_rgba(139,92,246,0.4)] transition-all duration-300 active:scale-[0.97] cursor-pointer"
+                    className="flex-1 flex items-center justify-center gap-2.5 rounded-2xl px-8 py-4 text-sm font-bold text-white bg-linear-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 shadow-[0_8px_30px_rgba(139,92,246,0.3)] hover:shadow-[0_12px_40px_rgba(139,92,246,0.4)] transition-all duration-300 active:scale-[0.97] cursor-pointer"
                   >
                     <span className="icon-[mdi--lightning-bolt] w-5 h-5 block" />
                     Commander maintenant
@@ -339,12 +339,12 @@ export default function ProductDetail() {
                   ].map((item) => (
                     <div
                       key={item.label}
-                      className="flex items-center gap-2.5 rounded-xl bg-[var(--color-surface)]/50 border border-white/5 px-3 py-3 hover:bg-[var(--color-surface)] transition-colors duration-200"
+                      className="flex items-center gap-2.5 rounded-xl bg-surface/50 border border-white/5 px-3 py-3 hover:bg-surface/80 transition-colors duration-200"
                     >
                       <span
                         className={`${item.icon} w-5 h-5 ${item.color} shrink-0`}
                       />
-                      <span className="text-xs font-medium text-[var(--color-text-muted)] leading-tight">
+                      <span className="text-xs font-medium text-text-muted leading-tight">
                         {item.label}
                       </span>
                     </div>
@@ -383,7 +383,7 @@ export default function ProductDetail() {
                     className={`px-5 py-3 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer ${
                       activeTab === "description"
                         ? "bg-purple-500 text-white shadow-lg shadow-primary/20"
-                        : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+                        : "text-text-muted hover:text-text"
                     }`}
                   >
                     Description
@@ -393,7 +393,7 @@ export default function ProductDetail() {
                     className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer ${
                       activeTab === "specs"
                         ? "bg-primary text-white shadow-lg shadow-primary/20"
-                        : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+                        : "text-text-muted hover:text-text"
                     }`}
                   >
                     Spécifications
@@ -403,7 +403,7 @@ export default function ProductDetail() {
                     className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer ${
                       activeTab === "livraison"
                         ? "bg-primary text-white shadow-lg shadow-primary/20"
-                        : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
+                        : "text-text-muted hover:text-text"
                     }`}
                   >
                     Livraison
@@ -414,13 +414,13 @@ export default function ProductDetail() {
                 {activeTab === "description" && (
                   <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                     <div className="relative rounded-4xl bg-bg/20 border border-text/20 p-8 lg:p-12 shadow-xl shadow-black/10">
-                      <h2 className="text-xl lg:text-3xl font-black text-[var(--color-text)] mb-6 flex items-center gap-3 pb-4">
+                      <h2 className="text-xl lg:text-3xl font-black text-text mb-6 flex items-center gap-3 pb-4">
                         <span className="icon-[mdi--information-box] w-7 h-7 text-primary" />
                         À propos de ce produit
                       </h2>
 
                       <div className="prose prose-invert max-w-none">
-                        <p className="text-sm lg:text-lg text-[var(--color-text-muted)] leading-[1.8] first-letter:text-4xl first-letter:font-black first-letter:text-primary first-letter:float-left first-letter:mr-3 first-letter:mt-1">
+                        <p className="text-sm lg:text-lg text-text-muted leading-[1.8] first-letter:text-4xl first-letter:font-black first-letter:text-primary first-letter:float-left first-letter:mr-3 first-letter:mt-1">
                           {fullDescription}
                         </p>
                       </div>
@@ -446,15 +446,15 @@ export default function ProductDetail() {
                         ].map((item) => (
                           <div
                             key={item.title}
-                            className="flex flex-col items-center text-center gap-3 p-4 rounded-2xl bg-white/[0.02] hover:bg-white/[0.04] transition-colors"
+                            className="flex flex-col items-center text-center gap-3 p-4 rounded-2xl bg-white/2 hover:bg-white/4 transition-colors"
                           >
                             <span
                               className={`${item.icon} w-8 h-8 text-primary`}
                             />
-                            <h3 className="text-sm font-bold text-[var(--color-text)]">
+                            <h3 className="text-sm font-bold text-text">
                               {item.title}
                             </h3>
-                            <p className="text-xs text-[var(--color-text-muted)]">
+                            <p className="text-xs text-text-muted">
                               {item.desc}
                             </p>
                           </div>
@@ -467,8 +467,8 @@ export default function ProductDetail() {
                 {/* Tab: Specs */}
                 {activeTab === "specs" && (
                   <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <div className="rounded-[32px] bg-bg/20 border border-text/20 p-8 lg:p-12 shadow-xl shadow-black/10">
-                      <h2 className="text-2xl lg:text-3xl font-black text-[var(--color-text)] mb-8 flex items-center gap-3">
+                    <div className="rounded-4xl bg-bg/20 border border-text/20 p-8 lg:p-12 shadow-xl shadow-black/10">
+                      <h2 className="text-2xl lg:text-3xl font-black text-text mb-8 flex items-center gap-3">
                         <span className="icon-[mdi--clipboard-list] w-7 h-7 text-primary" />
                         Spécifications techniques
                       </h2>
@@ -476,15 +476,15 @@ export default function ProductDetail() {
                         {specs.map((spec, idx) => (
                           <div
                             key={idx}
-                            className="flex items-center justify-between p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-colors"
+                            className="flex items-center justify-between p-4 rounded-xl bg-white/2 border border-white/5 hover:border-white/10 transition-colors"
                           >
                             <div className="flex items-center gap-3">
                               <span className="icon-[mdi--check-circle-outline] w-5 h-5 text-primary/60" />
-                              <span className="text-sm font-medium text-[var(--color-text)]">
+                              <span className="text-sm font-medium text-text">
                                 {spec}
                               </span>
                             </div>
-                            <span className="icon-[mdi--star-four-points] w-4 h-4 text-[var(--color-text-muted)]/20" />
+                            <span className="icon-[mdi--star-four-points] w-4 h-4 text-text-muted/20" />
                           </div>
                         ))}
                       </div>
@@ -495,8 +495,8 @@ export default function ProductDetail() {
                 {/* Tab: Livraison */}
                 {activeTab === "livraison" && (
                   <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <div className="rounded-[32px] bg-bg/20 border border-text/20 p-8 lg:p-12 shadow-xl shadow-black/10">
-                      <h2 className="text-2xl lg:text-3xl font-black text-[var(--color-text)] mb-8 flex items-center gap-3">
+                    <div className="rounded-4xl bg-bg/20 border border-text/20 p-8 lg:p-12 shadow-xl shadow-black/10">
+                      <h2 className="text-2xl lg:text-3xl font-black text-text mb-8 flex items-center gap-3">
                         <span className="icon-[mdi--truck-delivery] w-7 h-7 text-primary" />
                         Livraison & Retours
                       </h2>
@@ -525,16 +525,16 @@ export default function ProductDetail() {
                         ].map((item) => (
                           <div
                             key={item.title}
-                            className="flex gap-4 p-5 rounded-2xl bg-white/[0.02] border border-white/5"
+                            className="flex gap-4 p-5 rounded-2xl bg-white/2 border border-white/5"
                           >
                             <span
                               className={`${item.icon} w-6 h-6 text-primary shrink-0 mt-0.5`}
                             />
                             <div>
-                              <h3 className="text-sm font-bold text-[var(--color-text)] mb-1">
+                              <h3 className="text-sm font-bold text-text mb-1">
                                 {item.title}
                               </h3>
-                              <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
+                              <p className="text-sm text-text-muted leading-relaxed">
                                 {item.desc}
                               </p>
                             </div>
@@ -550,21 +550,21 @@ export default function ProductDetail() {
               <div className="grid gap-4 lg:col-span-4 lg:sticky lg:top-28 space-y-6 ">
                 {/* Carte récap prix */}
                 <div className="rounded-3xl bg-bg/20 border border-text/20 p-6">
-                  <h3 className="text-md font-bold text-[var(--color-text-muted)] uppercase tracking-wider mb-4">
+                  <h3 className="text-md font-bold text-text-muted uppercase tracking-wider mb-4">
                     Récapitulatif
                   </h3>
                   <div className="space-y-3 mb-6">
                     <div className="flex justify-between text-sm">
-                      <span className="text-[var(--color-text-muted)]">
+                      <span className="text-text-muted">
                         Prix unitaire
                       </span>
-                      <span className="font-semibold text-[var(--color-text)]">
+                      <span className="font-semibold text-text">
                         {newPrice.toLocaleString("fr-DZ")} DA
                       </span>
                     </div>
                     {oldPrice && (
                       <div className="flex justify-between text-sm">
-                        <span className="text-[var(--color-text-muted)]">
+                        <span className="text-text-muted">
                           Ancien prix
                         </span>
                         <span className="text-red-400 line-through">
@@ -574,7 +574,7 @@ export default function ProductDetail() {
                     )}
                     {discount && (
                       <div className="flex justify-between text-sm">
-                        <span className="text-[var(--color-text-muted)]">
+                        <span className="text-text-muted">
                           Réduction
                         </span>
                         <span className="text-green-400 font-semibold">
@@ -584,7 +584,7 @@ export default function ProductDetail() {
                     )}
                     <div className="h-px bg-white/5" />
                     <div className="flex justify-between">
-                      <span className="text-[var(--color-text)] font-semibold">
+                      <span className="text-text font-semibold">
                         Total
                       </span>
                       <span className="text-xl font-black text-primary">
@@ -594,7 +594,7 @@ export default function ProductDetail() {
                   </div>
                   <button
                     onClick={handleOrderNow}
-                    className="w-full flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-bold text-white bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 shadow-lg shadow-purple-500/20 transition-all duration-200 active:scale-[0.97] cursor-pointer"
+                    className="w-full flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-bold text-white bg-linear-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 shadow-lg shadow-purple-500/20 transition-all duration-200 active:scale-[0.97] cursor-pointer"
                   >
                     <span className="icon-[mdi--lightning-bolt] w-5 h-5" />
                     Commander
@@ -609,28 +609,28 @@ export default function ProductDetail() {
                   <div className="space-y-3">
                     <a
                       href="tel:+213"
-                      className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/5 hover:border-white/10 transition-all group"
+                      className="flex items-center gap-3 p-3 rounded-xl bg-white/20 hover:bg-white/40 border border-white/20 hover:border-white/40 transition-all group"
                     >
                       <span className="icon-[mdi--phone] w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
                       <div>
-                        <p className="text-sm font-medium text-[var(--color-text)]">
+                        <p className="text-sm font-medium text-text">
                           Appeler maintenant
                         </p>
-                        <p className="text-xs text-[var(--color-text-muted)]">
+                        <p className="text-xs text-text-muted">
                           Disponible 9h-18h
                         </p>
                       </div>
                     </a>
                     <Link
                       to="/contact"
-                      className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/5 hover:border-white/10 transition-all group"
+                      className="flex items-center gap-3 p-3 rounded-xl bg-white/20 hover:bg-white/40 border border-white/20 hover:border-white/40 transition-all group"
                     >
                       <span className="icon-[mdi--message-text] w-5 h-5 text-primary group-hover:scale-110 transition-transform" />
                       <div>
-                        <p className="text-sm font-medium text-[var(--color-text)]">
+                        <p className="text-sm font-medium text-text">
                           Nous écrire
                         </p>
-                        <p className="text-xs text-[var(--color-text-muted)]">
+                        <p className="text-xs text-text-muted">
                           Réponse sous 2h
                         </p>
                       </div>
@@ -650,7 +650,7 @@ export default function ProductDetail() {
             <div className="rounded-4xl bg-bg border border-text/20 p-6 lg:p-12 shadow-xl shadow-black/10">
               <div className="flex items-center justify-between mb-10 ">
                 <div>
-                  <h2 className="text-xl lg:text-3xl font-black text-[var(--color-text)] flex items-center gap-3 pb-2">
+                  <h2 className="text-xl lg:text-3xl font-black text-text flex items-center gap-3 pb-2">
                     <span className="icon-[mdi--tag-multiple] w-7 h-7 text-primary shrink-0" />
                     Dans la même catégorie
                   </h2>
@@ -698,14 +698,14 @@ export default function ProductDetail() {
                       <span className="text-xs font-semibold text-primary/70 uppercase tracking-wider">
                         {categoryTitle}
                       </span>
-                      <h3 className="text-sm font-bold text-[var(--color-text)] line-clamp-1 group-hover:text-primary transition-colors">
+                      <h3 className="text-sm font-bold text-text line-clamp-1 group-hover:text-primary transition-colors">
                         {p.name}
                       </h3>
-                      <p className="text-xs text-[var(--color-text-muted)] line-clamp-2 leading-relaxed">
+                      <p className="text-xs text-text-muted line-clamp-2 leading-relaxed">
                         {p.description}
                       </p>
                       <div className="flex items-center justify-between pt-2">
-                        <span className="text-base font-black text-[var(--color-text)]">
+                        <span className="text-base font-black text-text">
                           {p.newPrice.toLocaleString("fr-DZ")} DA
                         </span>
                         <span className="icon-[mdi--arrow-right] w-4 h-4 text-primary opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
@@ -727,13 +727,13 @@ export default function ProductDetail() {
           isStickyVisible ? "translate-y-0" : "translate-y-full"
         }`}
       >
-        <div className="bg-[var(--color-card-body)]/95 backdrop-blur-xl border-t border-white/10 px-4 py-3 shadow-[0_-8px_30px_rgba(0,0,0,0.3)]">
+        <div className="bg-card-body/95 backdrop-blur-xl border-t border-white/10 px-4 py-3 shadow-[0_-8px_30px_rgba(0,0,0,0.3)]">
           <div className="flex items-center gap-3">
             <div className="flex-1 min-w-0">
-              <p className="text-xs text-[var(--color-text-muted)] truncate">
+              <p className="text-xs text-text-muted truncate">
                 {name}
               </p>
-              <p className="text-lg font-black text-[var(--color-text)]">
+              <p className="text-lg font-black text-text">
                 {newPrice.toLocaleString("fr-DZ")} DA
               </p>
             </div>

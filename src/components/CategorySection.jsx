@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import CategoryCard from "./CategoryCard";
 
-// Section de produits par catégorie, utilisée sur la page d'accueil
 export default function CategorySection({ category }) {
   const { id, title, icon, products } = category;
 
-  const mobileProducts = products.slice(0, 6);
+  // On affiche max 6 produits sur mobile, tous sur desktop (la grille gère)
+  const displayProducts = products.slice(0, 6);
 
   return (
     <section
@@ -14,27 +14,22 @@ export default function CategorySection({ category }) {
       className="
         relative w-full rounded-2xl overflow-hidden
         bg-bg sm:bg-card-body
+        py-5 px-3 sm:px-5
         shadow-card-hover
-        sm:shadow-(--shadow-card)
-        py-6 px-3 sm:px-4
       "
     >
       {/* ── Header ── */}
-      <div className="relative flex flex-row items-center gap-3 mb-6">
-        <div className="flex min-w-0 items-center gap-2.5 py-4">
+      <div className="flex flex-row items-center gap-2 sm:gap-3 mb-5">
+        <div className="flex min-w-0 items-center gap-2 py-2 sm:py-3">
           <span
             aria-hidden="true"
-            className="
-              flex items-center justify-center shrink-0
-              w-9 h-9 rounded-xl text-base leading-none
-              bg-primary/15 border border-primary/25
-            "
+            className="flex items-center justify-center shrink-0 w-8 h-8 sm:w-9 sm:h-9 rounded-xl text-sm sm:text-base leading-none bg-primary/15 border border-primary/25"
           >
             {icon}
           </span>
           <h2
             id={`titre-${id}`}
-            className="truncate text-lg sm:text-xl font-extrabold text-text tracking-tight"
+            className="truncate text-base sm:text-xl font-extrabold text-text tracking-tight"
           >
             {title}
           </h2>
@@ -49,20 +44,20 @@ export default function CategorySection({ category }) {
           to={`/produits?categorie=${id}`}
           aria-label={`Voir tous les produits : ${title}`}
           className="
-            group shrink-0 inline-flex items-center gap-1.5
-            px-3 py-1.5 rounded-lg
-            bg-transparent border border-purple-500/30
-            text-xs font-semibold text-purple-500
-            transition-all duration-200
-            hover:border-3 hover:font-black
+            group shrink-0 inline-flex items-center gap-1
+            px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg
+            border border-purple-500/30
+            text-[11px] sm:text-xs font-semibold text-purple-500
+            transition-all duration-200 hover:border-purple-500 hover:font-black
+            whitespace-nowrap
           "
         >
           Voir plus
           <svg
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
-            width="13"
-            height="13"
+            width="12"
+            height="12"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -76,23 +71,16 @@ export default function CategorySection({ category }) {
         </Link>
       </div>
 
-      {/* ── Grille ── */}
+      {/* ── Grille produits ── */}
       <ul
         role="list"
         aria-label={`Produits ${title}`}
-        className="
-          grid list-none
-          grid-cols-2
-          sm:grid-cols-3
-          lg:grid-cols-3
-          xl:grid-cols-5
-          gap-3 sm:gap-8
-        "
+        className="grid list-none grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-3 sm:gap-5"
       >
-        {mobileProducts.map((product, index) => (
+        {displayProducts.map((product, index) => (
           <li
             key={product.id}
-            className={`min-w-0 flex ${index >= 5 ? "xl:hidden" : ""}`}
+            className={`min-w-0 flex ${index >= 4 ? "hidden sm:flex" : ""} ${index >= 5 ? "xl:hidden" : ""}`}
           >
             <CategoryCard product={product} category={category} />
           </li>

@@ -71,54 +71,46 @@ export default function Testimonials() {
     <section
       id="testimonials"
       aria-label="Avis clients"
-      className="py-20 px-6 sm:px-10 lg:px-20 "
+      className="scroll-mt-24 py-16 sm:py-20 px-4 sm:px-10 lg:px-20"
     >
-      {/* ── Titre ── */}
-      <div className="w-full mx-auto pb-10 text-center">
-        <p className="text-purple-500 text-xl font-extrabold uppercase tracking-[0.2em] mb-2">
+      <div className="w-full mx-auto pb-8 sm:pb-10 text-center">
+        <p className="text-purple-500 text-base sm:text-xl font-extrabold uppercase tracking-[0.2em] mb-2">
           Ce qu'ils disent
         </p>
-        <h2 className="text-2xl md:text-4xl font-black text-text tracking-tight">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-text tracking-tight">
           Avis de nos clients
         </h2>
-        <p className="text-text font-semibold mt-2">
+        <p className="text-text font-semibold mt-2 text-sm sm:text-base">
           Des centaines de clients satisfaits à travers toute l'Algérie.
         </p>
       </div>
 
-      {/* ── Grille ── */}
-      <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {testimonials.map((t, i) => (
           <article
             key={t.id}
-            className="relative flex flex-col gap-4 rounded-2xl border-l-2 border-t-2 border-b-6 border-r-8 border-purple-500/50 bg-bg  p-6 transition-all duration-300 hover:-translate-y-1 hover:border-purple-500 hover:shadow-card"
+            className="relative flex flex-col gap-4 rounded-2xl border-l-2 border-t-2 border-b-[6px] border-r-8 border-purple-500/50 bg-bg p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-purple-500"
           >
-            {/* Quote icon */}
             <span
               aria-hidden="true"
-              className="icon-[mdi--format-quote-open] w-8 h-8 text-purple-500/80 absolute top-4 right-5"
+              className="icon-[mdi--format-quote-open] w-7 h-7 sm:w-8 sm:h-8 text-purple-500/80 absolute top-4 right-4 sm:right-5"
             />
 
-            {/* Stars */}
             <div className="flex gap-1" aria-label={`Note : ${t.rating} sur 5`}>
               {Array.from({ length: 5 }).map((_, s) => (
                 <span
                   key={s}
                   aria-hidden="true"
-                  className={`icon-[mdi--star] w-4 h-4 ${
-                    s < t.rating ? "text-yellow-400" : "text-border"
-                  }`}
+                  className={`icon-[mdi--star] w-4 h-4 ${s < t.rating ? "text-yellow-400" : "text-border"}`}
                 />
               ))}
             </div>
 
-            {/* Text */}
             <p className="text-sm leading-relaxed text-text-muted flex-1">
               "{t.text}"
             </p>
 
-            {/* Product badge */}
-            <span className="inline-flex items-center gap-1.5 self-start rounded-lg border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-semibold text-primary">
+            <span className="inline-flex items-center gap-1.5 self-start rounded-lg border border-primary/20 bg-primary/5 px-3 py-1 text-[10px] sm:text-[11px] font-semibold text-primary">
               <span
                 aria-hidden="true"
                 className="icon-[mdi--shopping] w-3 h-3"
@@ -126,7 +118,6 @@ export default function Testimonials() {
               {t.product}
             </span>
 
-            {/* Author */}
             <div className="flex items-center gap-3 pt-2 border-t border-border">
               <div
                 aria-hidden="true"

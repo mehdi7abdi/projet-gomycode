@@ -572,66 +572,70 @@ function OrderItem({ item, onQtyChange, onRemove }) {
     : null;
 
   return (
-    <li className="flex gap-4 p-4 rounded-2xl bg-surface border border-purple-500/30 hover:border-purple-500/50 transition-all duration-200">
-      {/* Image */}
+    <li className="flex gap-3 p-3 rounded-2xl bg-surface border border-purple-500/30 hover:border-purple-500/50 transition-all duration-200">
+      {/* Image - réduite */}
       <div className="w-20 h-20 shrink-0 rounded-xl overflow-hidden bg-bg border border-white/8 flex items-center justify-center">
         <img
           src={image}
           alt={name}
-          className="w-full h-full object-contain p-1.5"
+          className="w-full h-full object-contain p-1"
         />
       </div>
 
-      {/* Infos */}
+      {/* Infos - layout vertical complet */}
       <div className="flex flex-1 flex-col min-w-0 gap-1.5">
-        <div className="flex items-start justify-between gap-2">
-          <div className="min-w-0">
-            <p className="text-[13px] font-bold text-text truncate">{name}</p>
-            <span className="text-[11px] text-purple-400 font-semibold">
-              {categoryIcon}
-            </span>
-          </div>
+        {/* Header : nom + discount sur une ligne */}
+        <div className="flex items-center gap-2 min-w-0">
+          <p className="text-[13px] font-bold text-text truncate min-w-0">
+            {name}
+          </p>
           {discount && (
-            <span className="shrink-0 rounded-md bg-red-600/20 border border-red-600/30 px-1.5 py-0.5 text-[10px] font-bold text-red-400">
+            <span className="shrink-0 rounded bg-red-600/20 border border-red-600/30 px-1 py-0.5 text-[10px] font-bold text-red-400">
               -{discount}%
             </span>
           )}
         </div>
 
-        <div className="flex items-center justify-between mt-auto">
-          {/* Prix */}
-          <div className="flex flex-col">
-            <span className="text-[11px] text-text-muted py-1">
-              {newPrice.toLocaleString("fr-DZ")} DA / unité
-            </span>
-            {oldPrice && (
-              <span className="text-[11px] text-red-400 line-through">
-                {oldPrice.toLocaleString("fr-DZ")} DA
-              </span>
-            )}
+        {/* Catégorie */}
+        <span className="text-[11px] text-purple-400 font-semibold">
+          {categoryIcon}
+        </span>
+
+        {/* Prix + Contrôles sur une ligne */}
+        <div className="flex items-center justify-between gap-2 mt-1">
+          {/* Prix compact : prix total en premier, unitaire barré à côté */}
+          <div className="flex items-baseline gap-1.5 min-w-0 flex-wrap">
             <span className="text-[14px] font-black text-text">
               {(newPrice * qty).toLocaleString("fr-DZ")} DA
             </span>
+            {oldPrice && (
+              <span className="text-[11px] text-red-400 line-through">
+                {oldPrice.toLocaleString("fr-DZ")}
+              </span>
+            )}
+            <span className="text-[10px] text-text-muted">
+              ({newPrice.toLocaleString("fr-DZ")}/u)
+            </span>
           </div>
 
-          {/* Contrôles */}
-          <div className="flex items-center gap-2">
-            <div className="flex items-center rounded-xl border border-purple-500/40 overflow-hidden">
+          {/* Contrôles : quantité + delete */}
+          <div className="flex items-center gap-1.5 shrink-0">
+            <div className="flex items-center rounded-lg border border-purple-500/40 overflow-hidden">
               <button
                 type="button"
                 onClick={() => onQtyChange(id, qty - 1)}
                 disabled={qty <= 1}
-                className="px-2.5 py-1.5 text-text-muted hover:text-text hover:bg-white/8 transition-all text-sm font-bold disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+                className="px-2 py-1 text-text-muted hover:text-text hover:bg-white/8 transition-all text-xs font-bold disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
               >
                 −
               </button>
-              <span className="px-2.5 text-[13px] font-bold text-text min-w-6 text-center">
+              <span className="px-1.5 text-[12px] font-bold text-text min-w-6 text-center">
                 {qty}
               </span>
               <button
                 type="button"
                 onClick={() => onQtyChange(id, qty + 1)}
-                className="px-2.5 py-1.5 text-text-muted hover:text-text hover:bg-white/8 transition-all text-sm font-bold cursor-pointer"
+                className="px-2 py-1 text-text-muted hover:text-text hover:bg-white/8 transition-all text-xs font-bold cursor-pointer"
               >
                 +
               </button>
@@ -640,7 +644,7 @@ function OrderItem({ item, onQtyChange, onRemove }) {
               type="button"
               onClick={() => onRemove(id)}
               aria-label={`Supprimer ${name}`}
-              className="p-1.5 rounded-lg text-text-muted hover:text-red-400 hover:bg-red-500/10 transition-all cursor-pointer"
+              className="p-1 rounded-md text-text-muted hover:text-red-400 hover:bg-red-500/10 transition-all cursor-pointer"
             >
               <span className="icon-[mdi--trash-can-outline] w-4 h-4 block" />
             </button>

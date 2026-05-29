@@ -37,16 +37,18 @@ export default function CartDrawer() {
 
   return (
     <>
+      {/* Overlay */}
       <div
         aria-hidden="true"
         onClick={() => setCartOpen(false)}
         className={`
-          fixed inset-0 z-[10110] bg-black/60 backdrop-blur-sm
+          fixed inset-0 z-10110 bg-black/60 backdrop-blur-sm
           transition-opacity duration-300
           ${cartOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}
         `}
       />
 
+      {/* Drawer */}
       <aside
         ref={drawerRef}
         tabIndex={-1}
@@ -57,14 +59,15 @@ export default function CartDrawer() {
           fixed top-0 right-0 z-10120
           h-full w-full sm:w-[50vw] lg:w-[35vw]
           flex flex-col
-          bg-bg/80 border-l border-purple-500
-          transition-transform duration-400 ease-[cubic-bezier(0.32,0.72,0,1)]
+          bg-bg/90 border-l border-purple-500
+          backdrop-blur-xl
+          transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]
           ${cartOpen ? "translate-x-0" : "translate-x-full"}
           outline-none
         `}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-white/10 shrink-0">
+        <div className="flex items-center justify-between px-4 sm:px-5 py-4 border-b border-white/10 shrink-0">
           <div className="flex items-center gap-2.5">
             <span
               aria-hidden="true"
@@ -90,8 +93,8 @@ export default function CartDrawer() {
           </button>
         </div>
 
-        {/* Items list — structure simplifiée sans flex */}
-        <div className="flex-1 overflow-y-auto px-4 py-5">
+        {/* Liste articles */}
+        <div className="flex-1 overflow-y-auto px-3 sm:px-4 py-5">
           {items.length === 0 ? (
             <div className="flex flex-col items-center justify-center h-full gap-4 text-center py-16">
               <span
@@ -110,16 +113,9 @@ export default function CartDrawer() {
               </button>
             </div>
           ) : (
-            <ul className="list-none m-0 p-0">
-              {items.map((item, index) => (
-                <li
-                  key={item.id}
-                  className="m-0 p-0"
-                  style={{
-                    marginBottom: index < items.length - 1 ? "24px" : "0",
-                    display: "block",
-                  }}
-                >
+            <ul className="flex flex-col gap-4 list-none m-0 p-0">
+              {items.map((item) => (
+                <li key={item.id}>
                   <CartItem
                     item={item}
                     onRemove={removeFromCart}
@@ -133,9 +129,10 @@ export default function CartDrawer() {
 
         {/* Footer */}
         {items.length > 0 && (
-          <div className="border-t border-purple-500/30 px-5 py-6 shrink-0">
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-col gap-2">
+          <div className="border-t border-purple-500/30 px-4 sm:px-5 py-5 shrink-0">
+            <div className="flex flex-col gap-3">
+              {/* Résumé articles */}
+              <div className="flex flex-col gap-1.5">
                 {items.map((item) => (
                   <div
                     key={item.id}
@@ -193,11 +190,8 @@ function CartItem({ item, onRemove, onQtyChange }) {
   const { id, name, image, newPrice, qty } = item;
 
   return (
-    <article
-      className="flex gap-4 p-4 rounded-2xl bg-bg border border-purple-500/50 hover:border-purple-500/30 transition-all duration-200"
-      style={{ display: "flex", margin: "0" }}
-    >
-      <div className="w-18 h-18 shrink-0 rounded-xl overflow-hidden bg-bg flex items-center justify-center">
+    <article className="flex gap-3 sm:gap-4 p-3 sm:p-4 rounded-2xl bg-bg border border-purple-500/50 hover:border-purple-500/30 transition-all duration-200">
+      <div className="w-16 h-16 sm:w-18 sm:h-18 shrink-0 rounded-xl overflow-hidden bg-bg flex items-center justify-center border border-white/8">
         <img
           src={image}
           alt={name}
@@ -205,39 +199,41 @@ function CartItem({ item, onRemove, onQtyChange }) {
         />
       </div>
 
-      <div className="flex flex-1 flex-col min-w-0 gap-2">
-        <p className="text-[13px] font-semibold text-text truncate">{name}</p>
-        <p className="text-[12px] text-text-muted">
+      <div className="flex flex-1 flex-col min-w-0 gap-1.5">
+        <p className="text-[12px] sm:text-[13px] font-semibold text-text truncate">
+          {name}
+        </p>
+        <p className="text-[11px] sm:text-[12px] text-text-muted">
           Unitaire :{" "}
           <span className="text-primary font-semibold">
             {newPrice.toLocaleString("fr-DZ")} DA
           </span>
         </p>
-        <p className="text-[13px] font-bold text-text">
+        <p className="text-[12px] sm:text-[13px] font-bold text-text">
           Sous-total :{" "}
           <span className="text-purple-400">
             {(newPrice * qty).toLocaleString("fr-DZ")} DA
           </span>
         </p>
 
-        <div className="flex items-center justify-between mt-2">
-          <div className="flex items-center gap-1.5 rounded-2xl border border-purple-500/50 overflow-hidden">
+        <div className="flex items-center justify-between mt-1.5">
+          <div className="flex items-center gap-1 rounded-2xl border border-purple-500/50 overflow-hidden">
             <button
               type="button"
               onClick={() => onQtyChange(id, qty - 1)}
-              aria-label="Diminuer la quantité"
-              className="px-2.5 py-1.5 text-text-muted hover:text-text hover:bg-white/8 transition-all duration-150 cursor-pointer text-sm font-bold"
+              aria-label="Diminuer"
+              className="px-2 py-1.5 text-text-muted hover:text-text hover:bg-white/8 transition-all duration-150 cursor-pointer text-sm font-bold"
             >
               −
             </button>
-            <span className="px-2 text-[13px] font-bold text-text min-w-5 text-center">
+            <span className="px-2 text-[12px] font-bold text-text min-w-5 text-center">
               {qty}
             </span>
             <button
               type="button"
               onClick={() => onQtyChange(id, qty + 1)}
-              aria-label="Augmenter la quantité"
-              className="px-2.5 py-1.5 text-text-muted hover:text-text hover:bg-white/8 transition-all duration-150 cursor-pointer text-sm font-bold"
+              aria-label="Augmenter"
+              className="px-2 py-1.5 text-text-muted hover:text-text hover:bg-white/8 transition-all duration-150 cursor-pointer text-sm font-bold"
             >
               +
             </button>

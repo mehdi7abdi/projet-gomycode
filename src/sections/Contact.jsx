@@ -1,4 +1,3 @@
-// sections/Contact.jsx
 import { useState } from "react";
 
 const socials = [
@@ -70,7 +69,6 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Intégration backend à venir
     setSent(true);
     setTimeout(() => setSent(false), 4000);
     setForm({ name: "", email: "", message: "" });
@@ -80,36 +78,38 @@ export default function Contact() {
     <section
       id="contact"
       aria-label="Nous contacter"
-      className="py-20 px-6 sm:px-10 lg:px-20 "
+      className="scroll-mt-24 py-16 sm:py-20 px-4 sm:px-10 lg:px-20"
     >
-      {/* ── Titre ── */}
-      <div className="w-full mx-auto pb-10 text-center">
-        <p className="text-purple-500 text-xl font-extrabold uppercase tracking-[0.2em] mb-2">
+      {/* Titre */}
+      <div className="w-full mx-auto pb-8 sm:pb-10 text-center">
+        <p className="text-purple-500 text-base sm:text-xl font-extrabold uppercase tracking-[0.2em] mb-2">
           Contactez-nous
         </p>
-        <h2 className="text-2xl md:text-4xl font-black text-text tracking-tight">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-text tracking-tight">
           On est là pour vous
         </h2>
-        <p className="text-text-muted font-semibold mt-2">
+        <p className="text-text-muted font-semibold mt-2 text-sm sm:text-base">
           Une question, une commande, un conseil ? Écrivez-nous.
         </p>
       </div>
 
-      <div className=" grid grid-cols-1 lg:grid-cols-2 gap-10">
-        {/* ── Infos + Réseaux ── */}
-        <div className="flex flex-col gap-6">
-          {/* Infos de contact */}
-          <div className="rounded-2xl border-l border-t border-b-4 border-r-4 border-purple-500 bg-surface p-6 flex flex-col gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10">
+        {/* Infos + Réseaux */}
+        <div className="flex flex-col gap-4 sm:gap-6">
+          <div className="rounded-2xl border-l border-t border-b-4 border-r-4 border-purple-500 bg-surface p-4 sm:p-6 flex flex-col gap-4">
             {infos.map((info) => (
-              <div key={info.label} className="flex items-center gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
+              <div
+                key={info.label}
+                className="flex items-center gap-3 sm:gap-4"
+              >
+                <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 border border-primary/20">
                   <span
                     aria-hidden="true"
-                    className={`${info.icon} w-5 h-5 text-primary`}
+                    className={`${info.icon} w-4 h-4 sm:w-5 sm:h-5 text-primary`}
                   />
                 </div>
                 <div>
-                  <p className="text-xs font-semibold text-text-muted uppercase tracking-wide">
+                  <p className="text-[11px] sm:text-xs font-semibold text-text-muted uppercase tracking-wide">
                     {info.label}
                   </p>
                   {info.href ? (
@@ -127,12 +127,11 @@ export default function Contact() {
             ))}
           </div>
 
-          {/* Réseaux sociaux */}
-          <div className="rounded-2xl border-l border-t border-b-4 border-r-4 border-purple-500 bg-surface p-6">
-            <p className="text-xs font-extrabold uppercase tracking-[0.15em] text-text-muted mb-4">
+          <div className="rounded-2xl border-l border-t border-b-4 border-r-4 border-purple-500 bg-surface p-4 sm:p-6">
+            <p className="text-xs font-extrabold uppercase tracking-[0.15em] text-text-muted mb-3 sm:mb-4">
               Suivez-nous
             </p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2 sm:gap-3">
               {socials.map((s) => (
                 <a
                   key={s.label}
@@ -140,9 +139,12 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className={`flex items-center gap-2 rounded-xl border border-primary/20 bg-primary/5 px-4 py-2.5 text-sm font-semibold text-text-muted transition-all duration-200 hover:border-primary ${s.color}`}
+                  className={`flex items-center gap-1.5 sm:gap-2 rounded-xl border border-primary/20 bg-primary/5 px-3 py-2 text-xs sm:text-sm font-semibold text-text-muted transition-all duration-200 hover:border-primary ${s.color}`}
                 >
-                  <span aria-hidden="true" className={`${s.icon} w-5 h-5`} />
+                  <span
+                    aria-hidden="true"
+                    className={`${s.icon} w-4 h-4 sm:w-5 sm:h-5`}
+                  />
                   {s.label}
                 </a>
               ))}
@@ -150,16 +152,16 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* ── Formulaire ── */}
-        <div className="rounded-2xl border-l border-t border-b-4 border-r-4 border-purple-500 bg-surface p-6 md:p-8">
-          <p className="text-sm font-extrabold uppercase tracking-[0.15em] text-text-muted mb-6">
+        {/* Formulaire */}
+        <div className="rounded-2xl border-l border-t border-b-4 border-r-4 border-purple-500 bg-surface p-4 sm:p-6 md:p-8">
+          <p className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.15em] text-text-muted mb-5 sm:mb-6">
             Envoyer un message
           </p>
 
           {sent && (
             <div
               role="alert"
-              className="mb-5 flex items-center gap-3 rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm font-semibold text-green-400"
+              className="mb-4 flex items-center gap-3 rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm font-semibold text-green-400"
             >
               <span
                 aria-hidden="true"
@@ -174,11 +176,10 @@ export default function Contact() {
             noValidate
             className="flex flex-col gap-4"
           >
-            {/* Nom */}
             <div className="flex flex-col gap-1.5">
               <label
                 htmlFor="contact-name"
-                className="text-xs font-semibold text-text-muted uppercase tracking-wide pt-4"
+                className="text-xs font-semibold text-text-muted uppercase tracking-wide"
               >
                 Nom complet
               </label>
@@ -195,7 +196,6 @@ export default function Contact() {
               />
             </div>
 
-            {/* Email */}
             <div className="flex flex-col gap-1.5">
               <label
                 htmlFor="contact-email"
@@ -216,7 +216,6 @@ export default function Contact() {
               />
             </div>
 
-            {/* Message */}
             <div className="flex flex-col gap-1.5">
               <label
                 htmlFor="contact-message"
@@ -236,7 +235,6 @@ export default function Contact() {
               />
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
               className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:bg-purple-500 hover:shadow-lg hover:shadow-primary/30 active:scale-[0.98] cursor-pointer"
