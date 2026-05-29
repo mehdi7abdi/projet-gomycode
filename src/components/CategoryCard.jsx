@@ -82,10 +82,10 @@ export default function CategoryCard({ product, category }) {
 
       {/* Contenu */}
       <div className="flex flex-1 flex-col p-3 sm:p-4 bg-card-body">
-        <h3 className="truncate text-[13px] sm:text-[14px] font-bold leading-snug text-primary transition-colors duration-200 group-hover:text-purple-500">
+        <h3 className=" text-[13px] sm:text-[14px] font-bold leading-snug text-primary transition-colors duration-200 group-hover:text-purple-500">
           {name}
         </h3>
-        <p className="mt-1.5 pb-2 flex-1 text-[11px] sm:text-[12px] font-semibold leading-relaxed text-text line-clamp-2">
+        <p className="mt-1.5 pb-2 flex-1 text-[11px] sm:text-[12px] font-semibold leading-relaxed text-text">
           {description}
         </p>
 
