@@ -1,4 +1,6 @@
 // Bannière principale de la page d'accueil
+import { Link } from "react-router-dom";
+
 export default function Hero() {
   return (
     <section
@@ -62,8 +64,8 @@ export default function Hero() {
 
             {/* Boutons CTA */}
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center pt-1">
-              <a
-                href="/produits"
+              <Link
+                to="/produits"
                 className="btn-float group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-2xl px-6 py-3.5 sm:px-7 sm:py-4 font-bold text-text/90 transition-all duration-300 hover:scale-[1.02] border border-purple-500/40 bg-white/20 backdrop-blur-sm hover:border-purple-500"
               >
                 <span className="relative z-10 flex items-center gap-2">
@@ -74,7 +76,7 @@ export default function Hero() {
                   />
                 </span>
                 <span className="absolute inset-0 bg-linear-to-r from-purple-600 to-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              </a>
+              </Link>
 
               <a
                 href="#contact"
